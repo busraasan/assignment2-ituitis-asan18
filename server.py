@@ -37,7 +37,7 @@ def contact_page():
 def create_app():
     app = Bottle()
     app.route("/static/<filepath:path>","GET",static_content)
-    app.route("/index.html", "GET", home_page)
+    app.route("/", "GET", home_page)
     app.route("/contact.html", "GET", contact_page)
     app.route("/about.html", "GET", about_page)
     app.route("/projects.html", "GET", projects_page)
