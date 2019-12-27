@@ -1,0 +1,19 @@
+div {
+    margin:16% 100px 16% 100px;
+}
+
+table, th, td {
+  border: 1px solid #AC0F05;
+  font-size:1.5rem;
+  padding:15px;
+  background-color:transparent;
+}
+table{
+  width:100%;
+}
+th{
+  color:#f6d365;
+}
+td{
+  color:#e15249;
+}

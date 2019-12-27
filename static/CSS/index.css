@@ -1,0 +1,17 @@
+section {
+    margin:20% 100px 20% 100px;
+    text-align:left;
+}
+
+.name {
+    color:#f6d365;
+    font-size:6rem;
+    font-family:"Orbitron", sans-serif;
+    margin:0;
+}
+
+section p{
+    color:#e15249;
+    font-family:"Monteserrat", sans-serif;
+    font-size:1.3rem;
+}

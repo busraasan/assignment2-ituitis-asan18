@@ -1,0 +1,41 @@
+section{
+  margin:2% 16% 2% 16%;
+  justify-content: center;
+}
+
+.mypic{
+  /*height: 210px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+h1{
+  color:#f6d365;
+  font-family:"Monteserrat", sans-serif;
+  font-size:2rem;
+}
+
+section p{
+  font-size:1.2rem;
+  font-family:"Monteserrat", sans-serif;
+  color:#e15249;
+}
+
+table, th, td {
+  border: 1px solid #AC0F05;
+  font-size:1.5rem;
+  padding:15px;
+  background-color:transparent;
+}
+table{
+  width:100%;
+  margin: 40px 0 40px 0;
+}
+th{
+  color:#f6d365;
+}
+td{
+  color:#e15249;
+}
