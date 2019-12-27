@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>R.R. Raskolnikov - Contact</title>
+    <link rel="shortcut icon" href="Images/dosto-edit.png" type="image/png" sizes="100x3">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/CSS/style.css">
+    <link rel="stylesheet" href="/static/CSS/contact.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+	<h2>This portfolio is completely fictional and created as a demonstration for a CS introductory course</h2>
+	<br />
+
+	<header>
+    <nav>
+      <ul class="navbar-content">
+          <li><a class="pages" href= "index.html">Home</a></li>
+          <li><a class="pages" href= "about.html">About</a></li>
+          <li><a class="pages" href= "projects.html">Projects</a></li>
+          <li><a class="pages" href= "contact.html">Contact</a></li>
+      </ul>
+
+      <img style="padding:25px;" src="/static/Images/banner.png" alt="Logo of my website." width="100">
+
+      <ul class="icon-content">
+          <li><a target="_blank" href= "https://twitter.com/busraasannn"><img src="/static/Images/icons/twitter.png" alt="Twitter icon"></a></li>
+          <li><a target="_blank" href= "https://github.com/ituitis-asan18"><img src="/static/Images/icons/github-logo.png" alt="Github icon"></a></li>
+          <li><a target="_blank" href= "https://www.linkedin.com/in/b%C3%BC%C5%9Fra-asan-3b1921197/"><img src="/static/Images/icons/linkedin.png" alt="Linkedin icon"></a></li>
+          <li><a target="_blank" href= "https://www.instagram.com/busraasann/"><img src="/static/Images/icons/instagram-symbol.png" alt="Instagram icon"></a></li>
+          <li><a target="_blank" href= "https://www.facebook.com/busra.asan.35"><img src="/static/Images/icons/facebook.png" alt="Facebook icon"></a></li>
+      </ul>
+    </nav>
+	</header>
+
+  <section>
+
+    <h1>MAKE CONTACT</h1>
+
+
+      <ul class="contact-list">
+        <li>Tel:
+          <ul class="phone-list">
+            <li>Mobile: +90 545 516 79 34</li>
+            <li >Office: 0212 592 51 78</li>
+          </ul></li>
+        <li>E-mail:
+          <ul>
+            <li>asan18@itu.edu.tr</li>
+            <li>busraasan2@gmail.com</li>
+          </ul>
+        </li>
+      </ul>
+
+      <table>
+       <tr>
+          <th>Ip Adresses</th>
+          <th>Count</th>
+      </tr>
+      % for ip in ip_adresses:
+      <tr>
+          <td> {{ ip["ip"] }} </td>
+          <td> {{ ip["count"] }} </td>
+      </tr>
+        % end
+       </tr>
+
+    </table>
+
+  </section>
+
+  <footer>
+     <h3>CREDITS</h3>
+     <p>Icons made by <a class="flaticon-link" href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a class="flaticon-link" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+  </footer>
+
+  </body>
+
+</html>
