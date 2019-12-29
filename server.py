@@ -2,6 +2,37 @@ import os
 
 from bottle import Bottle, request, static_file, route, get, template
 from pathlib import Path
+from hashlib import sha256
+
+
+myhash = "407a7714ed0e531d4d4e2a3adc8f882630aa9ce059de02e1a1f8351f09c1bd31"
+
+page_template = """
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Password Validation</title>
+    <link rel="stylesheet" href="https://itu-itis-2019.github.io/assignment1-ituitis-asan18/CSS/contact.css">
+  </head>
+  <body>
+    %(body_text)s
+    <table>
+      <tr>
+         <th style="border-bottom: dotted;">IP Adresses</th>
+         <th style="border-bottom: dotted;">Count</th>
+      </tr>
+      %(table_content)s
+    </table>
+    <br></br>
+    <a href= "/">Go to Home Page</a>
+  </body>
+</html>
+"""
+
+def create_hash(password):
+    pw_bytestring = password.encode()
+    return sha256(pw_bytestring).hexdigest()
 
 my_dir = os.getcwd()
 
@@ -12,8 +43,9 @@ def static_content(filepath):
 
 ip_adresses = []
 def home_page():
+    header = request.environ
     global ip_adresses
-    new_ip = request.headers.get("X Forwarded-For", "127.0.0.1")
+    new_ip = new_ip = request.headers.get("X-Forward-For", "127.0.0.1")
 
     for ip in ip_adresses:
         if new_ip == ip["ip"]:
@@ -22,7 +54,40 @@ def home_page():
     else:
         ip_adresses.append({"ip": new_ip, "count": 1})
 
-    return Path("index.html").read_text()
+    visitors = {"ip_adresses": ip_adresses, "header": header}
+    return template("index.html", visitors)
+
+def password_check():
+    password = request.forms.get('password')
+    table_content = """ """
+    if create_hash(password) == myhash and request.forms.get('show'):
+        content = """
+        <p>Password is correct.</p>
+        <p>First Ip was: %(first_visitor)s</p>
+        """
+        content = content % {"first_visitor": ip_adresses[0]}
+        ip_adresses.clear()
+    elif create_hash(password) == myhash and request.forms.get('dontshow'):
+        content = """
+        <p>Password is correct.</p>
+        """
+        ip_adresses.clear()
+    else:
+        content = """
+        <p>Sorry darling. You are not allowed.</p>
+        """
+
+    for ip in ip_adresses:
+        table_content += """
+        <tr>
+            <td>%(ip)s</td>
+            <td>%(count)s</td>
+        </tr>
+        """
+        table_content = table_content % {"ip": ip["ip"], "count": ip["count"]}
+
+    return page_template % {"body_text": content, "table_content": table_content}
+
 
 def about_page():
     return template("about.html")
@@ -31,8 +96,7 @@ def projects_page():
     return template("projects.html")
 
 def contact_page():
-    ip_info = {"ip_adresses": ip_adresses}
-    return template("contact.html", ip_info)
+    return template("contact.html")
 
 def create_app():
     app = Bottle()
@@ -41,6 +105,7 @@ def create_app():
     app.route("/contact.html", "GET", contact_page)
     app.route("/about.html", "GET", about_page)
     app.route("/projects.html", "GET", projects_page)
+    app.route("/validation", "POST", password_check)
     return app
 
 
