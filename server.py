@@ -60,14 +60,14 @@ def home_page():
 def password_check():
     password = request.forms.get('password')
     table_content = """ """
-    if create_hash(password) == myhash and request.forms.get('show'):
+    if create_hash(password) == myhash and request.POST.get('first_ip_show'):
         content = """
         <p>Password is correct.</p>
         <p>First Ip was: %(first_visitor)s</p>
         """
         content = content % {"first_visitor": ip_adresses[0]}
         ip_adresses.clear()
-    elif create_hash(password) == myhash and request.forms.get('dontshow'):
+    elif create_hash(password) == myhash and request.POST.get('first_ip_dontshow'):
         content = """
         <p>Password is correct.</p>
         """
