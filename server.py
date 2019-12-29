@@ -45,7 +45,7 @@ ip_adresses = []
 def home_page():
 
     global ip_adresses
-    new_ip = new_ip = request.environ.get("X-Forward-For")
+    new_ip = request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR')
 
     for ip in ip_adresses:
         if new_ip == ip["ip"]:
