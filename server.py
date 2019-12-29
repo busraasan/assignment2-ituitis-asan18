@@ -43,9 +43,9 @@ def static_content(filepath):
 
 ip_adresses = []
 def home_page():
-    header = request.environ
+
     global ip_adresses
-    new_ip = new_ip = request.headers.get("X-Forward-For", "127.0.0.1")
+    new_ip = new_ip = request.environ.get("X-Forward-For")
 
     for ip in ip_adresses:
         if new_ip == ip["ip"]:
@@ -54,7 +54,7 @@ def home_page():
     else:
         ip_adresses.append({"ip": new_ip, "count": 1})
 
-    visitors = {"ip_adresses": ip_adresses, "header": header}
+    visitors = {"ip_adresses": ip_adresses}
     return template("index.html", visitors)
 
 def password_check():
